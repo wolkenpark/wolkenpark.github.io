@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bildergalerie – ausgemalte Bilder aus den Wolkenpark-Büchern</title>
+<meta name="description" content="Von Kindern ausgemalte Buchseiten aus den Wolkenpark-Ausmalbüchern, nach Buch und Motiv sortierbar.">
+<meta name="theme-color" content="#fff5d8">
+<link rel="preload" href="assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/schriften.css">
+<link rel="stylesheet" href="assets/styles.css">
+<script defer src="assets/app.js"></script>
+</head>
+<body>
+<a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
+
+<header class="kopf">
+  <div class="rand kopf-innen">
+    <a class="marke" href="index.html" aria-label="Wolkenpark – zur Startseite">
+      <img src="assets/img/wortmarke.webp" alt="Wolkenpark" width="1400" height="383" fetchpriority="high">
+    </a>
+    <details class="nav-huelle">
+      <summary>
+        <svg class="balken-auf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="balken-zu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        Menü
+      </summary>
+      <nav class="haupt-nav" aria-label="Hauptnavigation"><a href="buch-bens-handwerkertag.html">Bücher</a><a href="galerie.html" aria-current="page">Bildergalerie</a><a href="einsenden.html">Bild einsenden</a></nav>
+    </details>
+  </div>
+</header>
+
+<main id="inhalt">
+
+  <section class="abschnitt--eng" id="galerie">
+    <div class="rand">
+      <p class="vorzeile">Die Bildergalerie</p>
+      <h1>Eure <span class="gemalt">Kunstwerke.</span></h1>
+      <p class="fuehrung" style="margin-bottom:var(--s8)">Hier zeigen wir ausgemalte Seiten aus den Wolkenpark-Büchern. Jede Farbe ist richtig – dieselbe Seite sieht bei jedem Kind anders aus.</p>
+
+      <div class="galerie-werkzeuge">
+        <div class="filter-feld">
+          <span id="filter-buch">Buch</span>
+          <div class="chip-reihe" role="group" aria-labelledby="filter-buch">
+            <button class="chip" data-filter="buch" data-wert="alle" aria-pressed="true">Alle Bücher</button>
+            <button class="chip" data-filter="buch" data-wert="ben" aria-pressed="false">Bens großer Handwerkertag</button>
+          </div>
+        </div>
+        <div class="filter-feld">
+          <label for="filter-motiv">Motiv</label>
+          <select class="auswahl" id="filter-motiv" data-filter="motiv">
+            <option value="alle">Alle Motive</option>
+            <option value="01">Ankunft an der Ferienwohnung</option><option value="02">Mia begrüßt an der Tür</option><option value="03">Der wackelige Stuhl</option><option value="04">Der Plan am Küchentisch</option><option value="05">Der Werkzeugkasten</option><option value="06">Die Schutzbrille für Ben</option><option value="07">Den Tisch zur Seite rücken</option><option value="08">Die Malerplane ausbreiten</option><option value="09">Den Stuhl festschrauben</option><option value="10">Der Stuhl hält wieder</option><option value="11">Unter dem Waschbecken</option><option value="12">Der tropfende Wasserhahn</option><option value="13">Hände waschen am Wasserhahn</option><option value="14">Das Regalbrett ausmessen</option><option value="15">Die Bretter aussuchen</option><option value="16">Sägen an der Werkbank</option><option value="17">Das Brett schleifen</option><option value="18">Das Brett lackieren</option><option value="19">Pause mit Apfelschnitzen</option><option value="20">Die Wasserwaage</option><option value="21">Das Regal anschrauben</option><option value="22">Das Regal wird eingeräumt</option><option value="23">Ein Blick in die fertige Wohnung</option><option value="24">Ben malt ein Bild</option><option value="25">Bens Bild wird aufgehängt</option><option value="26">Die quietschende Tür</option><option value="27">Die Garderobenhaken</option><option value="28">Aufräumen und fegen</option><option value="29">Die fertige Ferienwohnung</option><option value="30">Der Helfer-Stern für Ben</option>
+          </select>
+        </div>
+        <p class="treffer" id="treffer" aria-live="polite"></p>
+      </div>
+
+      <!-- Hier erscheinen die geprüften Einsendungen. Solange keine vorliegt,
+           blendet app.js Filter und Raster aus und zeigt den Leerzustand. -->
+      <div class="galerie-raster" id="galerie-raster" data-lupe-gruppe="galerie"></div>
+
+      <div class="leerzustand" id="ohne-treffer" hidden>
+        <p class="vorzeile" style="justify-content:center">Noch kein Bild dazu</p>
+        <h3>Zu diesem Motiv hängt noch nichts.</h3>
+        <p class="fuehrung" style="margin-inline:auto">Vielleicht malst du es ja als Erste oder Erster aus.</p>
+        <div class="knopf-reihe" style="justify-content:center;margin-top:var(--s6)">
+          <button class="knopf knopf--rand" id="filter-zuruecksetzen">Alle Bilder zeigen</button>
+          <a class="knopf knopf--sonne" href="einsenden.html">Bild einsenden</a>
+        </div>
+      </div>
+
+      <div class="leerzustand" id="leerzustand" hidden>
+        <img src="assets/img/teddy-wolke-schlafend.webp" alt="Der Wolkenpark-Teddy schläft auf einer Wolke." width="900" height="1200">
+        <p class="vorzeile" style="justify-content:center">Noch ganz leer hier</p>
+        <h3>Der Teddy macht ein Nickerchen, bis das erste Bild kommt.</h3>
+        <p class="fuehrung" style="margin-inline:auto">Noch hängt kein Bild in der Galerie. Mal eine Seite aus deinem Buch aus – dein Bild könnte das erste sein.</p>
+        <div class="knopf-reihe" style="justify-content:center;margin-top:var(--s6)">
+          <a class="knopf knopf--sonne" href="einsenden.html">So sendest du ein Bild ein</a>
+          <a class="knopf knopf--rand" href="buch-bens-handwerkertag.html">Das Buch entdecken</a>
+        </div>
+        <div class="leer-rahmen" aria-hidden="true">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-2 4 3"/></svg></div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-2 4 3"/></svg></div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-2 4 3"/></svg></div>
+        </div>
+      </div>
+
+      <p class="winzig" style="margin-top:var(--s7);max-width:62ch">In der Galerie erscheint nur die ausgemalte Illustration. Namen, Altersangaben oder sonstige persönliche Daten der Kinder werden nicht veröffentlicht.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="fuss">
+  <div class="rand">
+    <div class="fuss-raster">
+      <div>
+        <a class="wortmarke-typo" href="index.html"><svg viewBox="0 0 40 26" aria-hidden="true"><path fill="currentColor" d="M11 25C5 25 1 21 1 16c0-4 3-7 7-8 1-4 5-7 10-7 4 0 8 2 10 6 1-1 2-1 4-1 4 0 7 3 8 7 3 1 5 4 5 7 0 3-2 5-5 5Z"/></svg>Wolken<b>park</b></a>
+        <p class="klein" style="margin-top:var(--s4);max-width:34ch">Kleine Geschichten für große Fantasie. Ausmalbücher, in denen jedes Bild die Geschichte weitererzählt.</p>
+      </div>
+      <div>
+        <h4>Entdecken</h4>
+        <ul>
+          <li><a href="buch-bens-handwerkertag.html">Bücher</a></li>
+          <li><a href="galerie.html">Bildergalerie</a></li>
+          <li><a href="einsenden.html">Bild einsenden</a></li>
+          <li><a href="ueber.html">Über Wolkenpark</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt &amp; Rechtliches</h4>
+        <ul>
+          <li><a href="mailto:bilder@wolkenpark.de">bilder@wolkenpark.de</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fuss-unten">
+      <span>© 2026 Wolkenpark · Paul Spieker</span>
+      <span>Gestaltungsentwurf für wolkenpark.de</span>
+    </div>
+  </div>
+</footer>
+
+<dialog class="lupe" id="lupe" aria-labelledby="lupe-titel">
+  <div class="lupe-innen">
+    <div class="lupe-kopf">
+      <div>
+        <h2 id="lupe-titel" data-lupe-titel></h2>
+        <p data-lupe-untertitel></p>
+      </div>
+      <button class="schliessen" aria-label="Bildansicht schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="lupe-buehne">
+      <div class="bildrahmen bildrahmen--gross"><img data-lupe-bild src="" alt=""></div>
+    </div>
+    <div class="lupe-fuss">
+      <div class="blaettern">
+        <button data-lupe-zurueck aria-label="Vorheriges Bild">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        </button>
+        <span class="zaehler" data-lupe-zaehler aria-live="polite"></span>
+        <button data-lupe-weiter aria-label="Nächstes Bild">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <a class="textlink" data-lupe-buch href="buch-bens-handwerkertag.html">Zum Buch „Bens großer Handwerkertag“ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</dialog>
+</body>
+</html>

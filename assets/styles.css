@@ -1,0 +1,536 @@
+/* =========================================================================
+   Wolkenpark · Gestaltungssystem
+   Farben, Schriften, Abstände, Bedienelemente und Bildrahmen für wolkenpark.de
+   ========================================================================= */
+
+/* ---------- 1. Gestaltungsmarken ---------------------------------------- */
+:root{
+  /* Farben – abgeleitet vom Umschlag von „Bens großer Handwerkertag“ */
+  --papier:      #fff5d8;   /* Umschlagcreme, Seitengrund */
+  --papier-tief: #fae9c4;   /* abgesetzte Bänder und Streifen */
+  --karte:       #fffdf7;   /* Kartenfläche und Passepartout */
+  --tinte:       #123e50;   /* Titelfarbe des Umschlags, Fließtext */
+  --tinte-leise: #4f6a78;   /* Sekundärtext, 5,4:1 auf Papier */
+  --petrol:      #0f6e78;   /* Hauptakzent, 5,7:1 auf Papier */
+  --petrol-tief: #0a5159;   /* gedrückter Zustand */
+  --tuerkis:     #56a09d;   /* Umschlagakzent, nur für Flächen */
+  --tuerkis-hell:#7cc0bd;   /* Türkis auf dunklem Grund, 5,5:1 auf Tinte */
+  --himmel:      #cfe8f2;
+  --sonne:       #ffc73d;
+  --sonne-hell:  #ffe9a8;
+  --koralle:     #e2563c;
+  --gruen:       #6aa84f;
+  --linie:       #e6d9b8;   /* warme Trennlinie */
+  --linie-kraeftig:#d3c096;
+
+  /* Abstände – Achterschritte */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+
+  /* Radien */
+  --r-s:10px; --r-m:18px; --r-l:28px; --r-rund:999px;
+
+  /* Schatten – warm getönt, nie grau */
+  --schatten1: 0 2px 6px rgba(18,62,80,.055), 0 8px 20px rgba(18,62,80,.05);
+  --schatten2: 0 4px 10px rgba(18,62,80,.07), 0 18px 44px rgba(18,62,80,.09);
+  --schatten-knopf: 0 2px 0 rgba(18,62,80,.14);
+
+  /* Schrift */
+  --schrift-titel: 'Fredoka', ui-rounded, 'Trebuchet MS', system-ui, sans-serif;
+  --schrift-text:  'Nunito', ui-rounded, system-ui, -apple-system, sans-serif;
+
+  --breite: 1180px;
+  --kopf: 92px;
+}
+
+/* ---------- 2. Grundlagen ------------------------------------------------ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--kopf) + var(--s5))}
+body{
+  margin:0;
+  background:var(--papier);
+  color:var(--tinte);
+  font-family:var(--schrift-text);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  /* Papierkorn: ein Hauch Struktur, damit die Fläche nicht digital wirkt */
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+}
+img{max-width:100%;height:auto;display:block}
+/* display:grid/block an .werk und .galerie-raster schlaegt sonst [hidden]. */
+[hidden]{display:none!important}
+a{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+:focus-visible{outline:3px solid var(--koralle);outline-offset:3px;border-radius:4px}
+::selection{background:var(--sonne-hell)}
+
+/* ---------- 3. Typografie ------------------------------------------------ */
+h1,h2,h3,h4{font-family:var(--schrift-titel);font-weight:600;line-height:1.14;margin:0 0 var(--s4);letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(2.2rem,1.4rem + 3.4vw,3.9rem)}
+h2{font-size:clamp(1.7rem,1.2rem + 2.1vw,2.7rem)}
+h3{font-size:clamp(1.2rem,1.05rem + .65vw,1.5rem)}
+h4{font-size:1.05rem}
+p{margin:0 0 var(--s4);text-wrap:pretty}
+p:last-child{margin-bottom:0}
+.vorzeile{
+  font-family:var(--schrift-titel);font-size:.82rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--petrol);
+  margin:0 0 var(--s3);display:flex;align-items:center;gap:var(--s2);
+}
+.vorzeile::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--sonne);flex:none}
+.fuehrung{font-size:1.22rem;line-height:1.62;color:var(--tinte);max-width:56ch}
+.klein{font-size:.92rem;color:var(--tinte-leise)}
+.winzig{font-size:.82rem;line-height:1.55;color:var(--tinte-leise)}
+
+/* Buntstiftstrich unter einem Wort */
+.gemalt{position:relative;color:var(--petrol);white-space:nowrap}
+.gemalt::after{
+  content:"";position:absolute;left:-2%;right:-2%;bottom:-.16em;height:.3em;
+  background:no-repeat center/100% 100% url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9C45 3 112 2 197 6' stroke='%23ffc73d' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3Cpath d='M9 12.5C58 8.5 120 8 191 11' stroke='%23ffc73d' stroke-width='3' stroke-linecap='round' fill='none' opacity='.55'/%3E%3C/svg%3E");
+}
+
+/* ---------- 4. Grundraster ---------------------------------------------- */
+.rand{width:min(var(--breite),100% - var(--s7));margin-inline:auto}
+.rand--schmal{width:min(760px,100% - var(--s7))}
+.abschnitt{padding-block:clamp(var(--s8),7vw,var(--s10))}
+.abschnitt--eng{padding-block:clamp(var(--s7),5vw,var(--s9))}
+.band{background:var(--papier-tief)}
+.band-karte{background:var(--karte)}
+.kopfzeile-gruppe{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s6);flex-wrap:wrap;margin-bottom:var(--s7)}
+.kopfzeile-gruppe h2{margin-bottom:var(--s3)}
+.nur-screenreader{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sprungmarke{position:absolute;left:var(--s4);top:-100px;z-index:100;background:var(--petrol);color:var(--karte);padding:var(--s3) var(--s5);border-radius:var(--r-s);font-weight:700;transition:top .15s}
+.sprungmarke:focus{top:var(--s3)}
+
+/* Wolkenkante als Abschnittstrenner – greift den Namen „Wolkenpark“ auf */
+.wolkenkante{display:block;width:100%;height:clamp(28px,4vw,52px);fill:currentColor}
+
+/* ---------- 5. Marke ----------------------------------------------------- */
+.marke{display:inline-flex;align-items:center;gap:var(--s3);text-decoration:none;padding:var(--s2) 0}
+.marke img{width:clamp(146px,16vw,196px);height:auto}
+/* Typografische Wortmarke – schlichte Fassung für Fußzeile, Druck und kleine Flächen */
+.wortmarke-typo{
+  font-family:var(--schrift-titel);font-weight:600;font-size:1.55rem;letter-spacing:-.015em;
+  color:var(--petrol);display:inline-flex;align-items:center;gap:0;text-decoration:none;line-height:1;
+}
+.wortmarke-typo b{font-weight:600;color:var(--tuerkis)}
+.wortmarke-typo svg{width:.9em;height:.9em;flex:none;color:var(--sonne);margin-right:.22em}
+
+/* ---------- 6. Kopfzeile und Navigation ---------------------------------- */
+/* Die Navigation ist ein <details>-Element: aufklappbar ohne JavaScript,
+   mit Tastatur bedienbar und mit nativem aria-expanded. */
+.kopf{
+  position:sticky;top:0;z-index:40;background:rgba(255,245,216,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--linie);
+}
+.kopf-innen{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);min-height:var(--kopf)}
+.nav-huelle > summary{display:none}
+.haupt-nav{display:flex;align-items:center;gap:var(--s2)}
+.haupt-nav a{
+  text-decoration:none;font-weight:700;font-size:1rem;padding:var(--s3) var(--s4);
+  border-radius:var(--r-s);position:relative;display:block;
+}
+.haupt-nav a:hover{background:var(--papier-tief)}
+.haupt-nav a[aria-current="page"]{color:var(--petrol)}
+.haupt-nav a[aria-current="page"]::after{
+  content:"";position:absolute;left:var(--s4);right:var(--s4);bottom:6px;height:3px;
+  border-radius:3px;background:var(--sonne);
+}
+
+@media (max-width:860px){
+  .nav-huelle > summary{
+    display:inline-flex;align-items:center;gap:var(--s2);list-style:none;cursor:pointer;
+    min-height:48px;padding:var(--s2) var(--s4);
+    border:1.5px solid var(--linie-kraeftig);border-radius:var(--r-s);
+    background:var(--karte);font-weight:700;font-size:.95rem;
+  }
+  .nav-huelle > summary::-webkit-details-marker{display:none}
+  .nav-huelle > summary svg{width:20px;height:20px}
+  .nav-huelle[open] > summary{background:var(--petrol);color:var(--karte);border-color:var(--petrol)}
+  .nav-huelle .balken-zu{display:none}
+  .nav-huelle[open] .balken-auf{display:none}
+  .nav-huelle[open] .balken-zu{display:block}
+  .haupt-nav{display:none}
+  .nav-huelle[open] .haupt-nav{
+    display:flex;position:absolute;left:0;right:0;top:100%;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:var(--karte);border-bottom:1px solid var(--linie);box-shadow:var(--schatten2);
+    padding:var(--s3) max(var(--s5),calc((100vw - var(--breite))/2 + var(--s5))) var(--s5);
+  }
+  .haupt-nav a{padding:var(--s4);font-size:1.1rem;border-bottom:1px solid var(--linie)}
+  .haupt-nav a:last-child{border-bottom:0}
+  .haupt-nav a[aria-current="page"]::after{display:none}
+  .haupt-nav a[aria-current="page"]{background:var(--papier-tief);border-radius:var(--r-s)}
+}
+
+/* ---------- 7. Bedienelemente -------------------------------------------- */
+.knopf{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--s3);
+  min-height:54px;padding:var(--s3) var(--s6);border-radius:var(--r-rund);
+  font-family:var(--schrift-titel);font-weight:500;font-size:1.05rem;letter-spacing:.005em;
+  text-decoration:none;text-align:center;
+  transition:transform .16s ease,box-shadow .16s ease,background-color .16s ease;
+}
+.knopf svg{width:1.1em;height:1.1em;flex:none}
+.knopf:hover{transform:translateY(-2px)}
+.knopf:active{transform:translateY(0)}
+.knopf--haupt{background:var(--petrol);color:var(--karte);box-shadow:var(--schatten-knopf)}
+.knopf--haupt:hover{background:var(--petrol-tief)}
+.knopf--sonne{background:var(--sonne);color:var(--tinte);box-shadow:var(--schatten-knopf)}
+.knopf--sonne:hover{background:#ffb81f}
+.knopf--rand{background:var(--karte);color:var(--tinte);border:1.5px solid var(--linie-kraeftig)}
+.knopf--rand:hover{border-color:var(--petrol);color:var(--petrol)}
+.knopf--klein{min-height:46px;padding:var(--s2) var(--s5);font-size:.98rem}
+.knopf-reihe{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center}
+
+.textlink{
+  display:inline-flex;align-items:center;gap:var(--s2);font-weight:700;color:var(--petrol);
+  text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px;
+  text-decoration-color:var(--sonne);padding-block:var(--s2);
+}
+.textlink:hover{text-decoration-color:var(--petrol)}
+.textlink svg{width:1em;height:1em;flex:none}
+
+/* Filterchips der Galerie */
+.chip-reihe{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.chip{
+  min-height:46px;padding:var(--s2) var(--s5);border-radius:var(--r-rund);
+  background:var(--karte);border:1.5px solid var(--linie);font-weight:700;font-size:.95rem;
+  transition:background-color .15s,border-color .15s,color .15s;
+}
+.chip:hover{border-color:var(--linie-kraeftig);background:var(--papier-tief)}
+.chip[aria-pressed="true"]{background:var(--petrol);border-color:var(--petrol);color:var(--karte)}
+.chip[aria-pressed="true"]:hover{background:var(--petrol-tief)}
+
+/* ---------- 8. Bildrahmen ------------------------------------------------ */
+/* Das Leitelement der Website: die Zeichnung hängt in einem Passepartout. */
+.bildrahmen{
+  display:block;
+  background:var(--karte);padding:clamp(12px,2.2vw,22px);border-radius:var(--r-m);
+  border:1px solid var(--linie-kraeftig);box-shadow:var(--schatten1);
+}
+.bildrahmen > img,.bildrahmen > .bildflaeche{
+  border-radius:6px;background:#fff;
+  box-shadow:0 0 0 1px rgba(18,62,80,.1);
+  width:100%;
+}
+.bildrahmen--gross{padding:clamp(16px,3vw,34px);border-radius:var(--r-l);box-shadow:var(--schatten2)}
+
+/* Buchcover: ohne Passepartout, mit angedeutetem Buchrücken */
+.buchcover{
+  position:relative;border-radius:3px 12px 12px 3px;overflow:hidden;background:var(--papier);
+  box-shadow:0 0 0 1px rgba(18,62,80,.12), 0 16px 30px rgba(18,62,80,.17), 0 42px 76px rgba(18,62,80,.16);
+}
+.buchcover::after{
+  content:"";position:absolute;inset:0 auto 0 0;width:14px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(18,62,80,.22),rgba(18,62,80,.05) 55%,transparent);
+}
+.bildflaeche{aspect-ratio:3/4;display:grid;place-items:center}
+
+/* Karte */
+.karte{
+  background:var(--karte);border:1px solid var(--linie);border-radius:var(--r-l);
+  padding:clamp(var(--s5),3vw,var(--s7));box-shadow:var(--schatten1);
+}
+
+/* Drei Besonderheiten – bewusst ohne Kartenkästen, damit es nach Buch
+   und nicht nach Produktseite aussieht. */
+.merkmale{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(var(--s5),4vw,var(--s8))}
+.merkmal{position:relative;padding-left:clamp(var(--s5),3vw,var(--s7))}
+.merkmal + .merkmal::before{
+  content:"";position:absolute;left:0;top:4px;bottom:4px;width:0;
+  border-left:2px dashed var(--linie-kraeftig);
+}
+.merkmal:first-child{padding-left:0}
+.merkmal .zahl{
+  font-family:var(--schrift-titel);font-size:clamp(3rem,2rem + 2.4vw,4.2rem);font-weight:600;
+  color:var(--petrol);line-height:.95;display:block;margin-bottom:var(--s3);
+}
+.merkmal h3{margin-bottom:var(--s2);font-size:1.18rem}
+.merkmal p{font-size:1rem;color:var(--tinte-leise);margin:0}
+@media (max-width:760px){
+  .merkmal{padding-left:0;padding-top:var(--s5)}
+  .merkmal + .merkmal::before{left:0;right:0;top:0;bottom:auto;width:auto;border-left:0;border-top:2px dashed var(--linie-kraeftig)}
+}
+
+/* ---------- 9. Startseite: Auftakt --------------------------------------- */
+.auftakt{position:relative;padding-block:clamp(var(--s8),7vw,var(--s10)) clamp(var(--s9),8vw,var(--s10));overflow:clip}
+.auftakt-raster{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(var(--s6),5vw,var(--s9));align-items:center}
+.auftakt h1{margin-bottom:var(--s5)}
+.auftakt .knopf-reihe{margin-top:var(--s7)}
+.auftakt-bild{position:relative}
+.auftakt-cover{max-width:min(400px,86%);margin-inline:auto;transform:rotate(-2.5deg)}
+.auftakt-teddy{
+  position:absolute;right:-9%;bottom:-10%;width:37%;max-width:226px;
+  filter:drop-shadow(0 14px 26px rgba(18,62,80,.18));
+}
+/* Handgezeichnete Wolken im Hintergrund, sehr zurückhaltend */
+.wolke{position:absolute;color:#fff;opacity:.95;pointer-events:none;filter:drop-shadow(0 2px 5px rgba(18,62,80,.05))}
+.wolke--1{top:8%;left:-3%;width:210px}
+.wolke--2{top:40%;right:1%;width:132px;opacity:.75}
+.stern{color:var(--sonne);position:absolute;pointer-events:none}
+
+/* ---------- 10. Galerie --------------------------------------------------- */
+.galerie-werkzeuge{
+  display:flex;flex-wrap:wrap;gap:var(--s5);align-items:flex-end;justify-content:space-between;
+  padding:var(--s5);background:var(--karte);border:1px solid var(--linie);border-radius:var(--r-l);
+  margin-bottom:var(--s7);
+}
+.filter-feld{display:flex;flex-direction:column;gap:var(--s3)}
+.filter-feld > span{font-weight:700;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tinte-leise)}
+.treffer{font-size:.95rem;color:var(--tinte-leise);margin:0}
+
+.galerie-raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:clamp(var(--s5),3vw,var(--s7))}
+.werk{display:block;width:100%;text-align:left;padding:0}
+.werk .bildrahmen{transition:transform .2s ease,box-shadow .2s ease}
+.werk:nth-child(3n+1) .bildrahmen{transform:rotate(-1.1deg)}
+.werk:nth-child(3n+2) .bildrahmen{transform:rotate(.8deg)}
+.werk:nth-child(3n) .bildrahmen{transform:rotate(-.4deg)}
+.werk:hover .bildrahmen,.werk:focus-visible .bildrahmen{transform:rotate(0) translateY(-4px);box-shadow:var(--schatten2)}
+.werk-text{display:block;padding:var(--s4) var(--s2) 0}
+.werk-text strong{display:block;font-family:var(--schrift-titel);font-weight:500;font-size:1.08rem;line-height:1.3}
+.werk-text span{display:block;font-size:.9rem;color:var(--tinte-leise);margin-top:2px}
+
+
+/* Leerzustand */
+.leerzustand{text-align:center;max-width:620px;margin-inline:auto;padding-block:var(--s7)}
+.leerzustand img{width:min(230px,52vw);margin:0 auto var(--s6)}
+.leerzustand h3{font-size:clamp(1.4rem,1.1rem + 1.2vw,2rem)}
+.leer-rahmen{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:var(--s5);margin-top:var(--s8)}
+.leer-rahmen > div{
+  aspect-ratio:3/4;border:2px dashed var(--linie-kraeftig);border-radius:var(--r-m);
+  display:grid;place-items:center;color:var(--linie-kraeftig);background:rgba(255,253,247,.5);
+}
+.leer-rahmen svg{width:46px;height:46px}
+
+
+/* ---------- 11. Bildansicht (Lightbox) ------------------------------------ */
+.lupe{
+  border:0;padding:0;max-width:min(1100px,94vw);max-height:94dvh;width:100%;
+  background:var(--papier);border-radius:var(--r-l);box-shadow:var(--schatten2);color:var(--tinte);
+}
+.lupe::backdrop{background:rgba(18,62,80,.74);backdrop-filter:blur(3px)}
+.lupe-innen{display:grid;grid-template-rows:auto 1fr auto;max-height:94dvh}
+.lupe-kopf{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s4);padding:var(--s5) var(--s5) var(--s3)}
+.lupe-kopf h2{font-size:1.4rem;margin:0 0 2px}
+.lupe-kopf p{margin:0;font-size:.95rem;color:var(--tinte-leise)}
+.schliessen{
+  width:48px;height:48px;flex:none;border-radius:var(--r-rund);background:var(--karte);
+  border:1.5px solid var(--linie-kraeftig);display:grid;place-items:center;
+}
+.schliessen:hover{background:var(--koralle);border-color:var(--koralle);color:#fff}
+.schliessen svg{width:22px;height:22px}
+.lupe-buehne{overflow:auto;padding:var(--s2) var(--s5);display:grid;place-items:center}
+.lupe-buehne .bildrahmen{max-width:min(620px,100%)}
+/* Das ganze Bild muss ohne Scrollen sichtbar sein. */
+.lupe-buehne .bildrahmen > img{max-height:58dvh;width:auto;margin-inline:auto}
+.lupe-fuss{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+  padding:var(--s5);border-top:1px solid var(--linie);margin-top:var(--s5);flex-wrap:wrap;
+}
+.blaettern{display:flex;align-items:center;gap:var(--s3)}
+.blaettern button{
+  width:54px;height:54px;border-radius:var(--r-rund);background:var(--karte);
+  border:1.5px solid var(--linie-kraeftig);display:grid;place-items:center;
+}
+.blaettern button:hover:not(:disabled){background:var(--petrol);border-color:var(--petrol);color:var(--karte)}
+.blaettern button:disabled{opacity:.35;cursor:not-allowed}
+.blaettern svg{width:22px;height:22px}
+.zaehler{font-weight:700;font-size:.95rem;min-width:5.5em;text-align:center}
+
+@media (max-width:640px){
+  .lupe{max-width:100vw;width:100vw;max-height:100dvh;height:100dvh;border-radius:0;margin:0}
+  /* Ohne height:100% waechst das Raster nur bis zum Inhalt und der Fuss
+     haengt mitten im Schirm statt unten. */
+  .lupe-innen{max-height:100dvh;height:100%}
+  .lupe-fuss{position:sticky;bottom:0;background:var(--papier);justify-content:center}
+  .lupe-fuss .textlink{width:100%;justify-content:center}
+}
+
+/* ---------- 12. Ablauf „Bild einsenden“ ----------------------------------- */
+.ablauf{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--s6);counter-reset:schritt;list-style:none;padding:0;margin:0}
+.ablauf li{background:var(--karte);border:1px solid var(--linie);border-radius:var(--r-l);padding:var(--s6) var(--s5)}
+.ablauf li::before{
+  counter-increment:schritt;content:counter(schritt);
+  display:grid;place-items:center;width:54px;height:54px;border-radius:var(--r-rund);
+  background:var(--sonne);color:var(--tinte);font-family:var(--schrift-titel);font-size:1.6rem;font-weight:600;
+  margin-bottom:var(--s4);
+}
+.ablauf h3{margin-bottom:var(--s2)}
+.ablauf p{margin:0;color:var(--tinte-leise);font-size:.98rem}
+
+.hinweisliste{list-style:none;padding:0;margin:0;display:grid;gap:var(--s4)}
+.hinweisliste li{display:flex;gap:var(--s4);align-items:flex-start}
+.hinweisliste svg{width:26px;height:26px;flex:none;color:var(--petrol);margin-top:2px}
+.hinweisliste strong{display:block}
+.hinweisliste span{color:var(--tinte-leise);font-size:.97rem}
+
+/* Kopierbare E-Mail-Adresse */
+.adresszeile{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);margin-top:var(--s5)}
+.adresse{
+  font-family:var(--schrift-titel);font-size:clamp(1.1rem,1rem + .7vw,1.4rem);font-weight:500;
+  background:var(--papier-tief);border:1.5px dashed var(--linie-kraeftig);border-radius:var(--r-s);
+  padding:var(--s3) var(--s5);user-select:all;
+}
+.kopiert{color:var(--gruen);font-weight:700;font-size:.92rem}
+
+/* Elternhinweis */
+.elternkasten{background:var(--himmel);border:1px solid #a9d3e4;border-radius:var(--r-l);padding:clamp(var(--s5),3vw,var(--s7))}
+.elternkasten .vorzeile{color:#0b5c72}
+.platzhalter-notiz{
+  border-left:4px solid var(--sonne);background:var(--papier-tief);
+  padding:var(--s4) var(--s5);border-radius:0 var(--r-s) var(--r-s) 0;font-size:.93rem;color:var(--tinte-leise);
+}
+
+/* ---------- 13. Buchseite ------------------------------------------------- */
+.buch-raster{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(var(--s6),5vw,var(--s9));align-items:start}
+.buch-daten{list-style:none;padding:0;margin:var(--s6) 0 0;display:grid;gap:0;border-top:1px solid var(--linie)}
+.buch-daten li{display:flex;justify-content:space-between;gap:var(--s4);padding:var(--s4) 0;border-bottom:1px solid var(--linie)}
+.buch-daten li > span:first-child{font-weight:700}
+.buch-daten span:last-child{color:var(--tinte-leise);text-align:right}
+.extern-notiz{display:flex;align-items:center;gap:var(--s2);font-size:.88rem;color:var(--tinte-leise);margin-top:var(--s3)}
+.extern-notiz svg{width:16px;height:16px;flex:none}
+
+/* Blätterbare Innenseiten */
+/* overflow-x:auto laesst den Browser auch overflow-y auf auto rechnen.
+   Ohne Polsterung oben schneidet das Drehung, Schatten und Hover-Lift ab. */
+.blaetterband{display:flex;gap:var(--s5);overflow-x:auto;padding-block:var(--s5);scroll-snap-type:x mandatory;scrollbar-width:thin}
+.blaetterband > *{flex:0 0 clamp(210px,26vw,270px);scroll-snap-align:start}
+.blaetterband .werk-text{padding-inline:0}
+
+/* ---------- 14. Rechtstexte ---------------------------------------------- */
+.rechtstext{max-width:70ch}
+.rechtstext h2{margin-top:var(--s8);font-size:1.5rem}
+.rechtstext h2:first-of-type{margin-top:var(--s6)}
+.rechtstext address{font-style:normal;background:var(--karte);border:1px solid var(--linie);border-radius:var(--r-m);padding:var(--s5);display:inline-block;line-height:1.8}
+
+/* ---------- 15. Fußzeile -------------------------------------------------- */
+.fuss{background:var(--tinte);color:var(--papier);padding-block:var(--s8) var(--s6);margin-top:var(--s9)}
+.fuss a{color:var(--papier)}
+.fuss .wortmarke-typo{color:var(--sonne)}
+.fuss .wortmarke-typo b{color:var(--tuerkis-hell)}
+.fuss-raster{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--s7);padding-bottom:var(--s7);border-bottom:1px solid rgba(255,245,216,.18)}
+.fuss h4{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tuerkis-hell);margin-bottom:var(--s4)}
+.fuss ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2)}
+.fuss ul a{text-decoration:none;padding-block:var(--s2);display:inline-block}
+.fuss ul a:hover{text-decoration:underline;text-underline-offset:4px}
+.fuss .klein,.fuss .winzig{color:rgba(255,245,216,.76)}
+.fuss-unten{padding-top:var(--s5);font-size:.88rem;color:rgba(255,245,216,.72);display:flex;flex-wrap:wrap;gap:var(--s4);justify-content:space-between}
+
+/* ---------- 16. Gestaltungssystem-Seite ----------------------------------- */
+.muster{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--s4)}
+.farbfeld{border-radius:var(--r-m);overflow:hidden;border:1px solid var(--linie);background:var(--karte)}
+.farbfeld i{display:block;height:84px}
+.farbfeld span{display:block;padding:var(--s3);font-size:.82rem;line-height:1.45}
+.farbfeld b{display:block;font-size:.9rem}
+.massband{display:flex;align-items:flex-end;gap:var(--s3);flex-wrap:wrap}
+.massband div{text-align:center;font-size:.75rem;color:var(--tinte-leise)}
+.massband i{display:block;background:var(--petrol);border-radius:3px;margin-bottom:var(--s2)}
+
+/* ---------- 17. Anpassung an kleine Bildschirme --------------------------- */
+@media (max-width:980px){
+  .auftakt-raster,.buch-raster{grid-template-columns:1fr;gap:var(--s7)}
+  .auftakt-bild{order:-1}
+  .auftakt-cover{max-width:min(320px,70%)}
+  .auftakt-teddy{width:34%;right:2%}
+  .fuss-raster{grid-template-columns:1fr 1fr;gap:var(--s6)}
+  .fuss-raster > :first-child{grid-column:1/-1}
+}
+@media (max-width:700px){
+  :root{--kopf:72px}
+  body{font-size:16px}
+  .rand,.rand--schmal{width:min(100% - var(--s5)*2,var(--breite))}
+  .galerie-raster{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--s5)}
+  .galerie-werkzeuge{flex-direction:column;align-items:stretch}
+  .kopfzeile-gruppe{margin-bottom:var(--s6)}
+  .fuss-raster{grid-template-columns:1fr}
+  .knopf-reihe .knopf{width:100%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .werk:hover .bildrahmen{transform:none}
+}
+
+@media print{
+  .kopf,.fuss,.galerie-werkzeuge,.sprungmarke{display:none}
+  body{background:#fff}
+}
+
+/* ---------- 18. Zusammengesetzte Bausteine -------------------------------- */
+.ueber-karte{display:grid;grid-template-columns:auto 1fr;gap:clamp(var(--s5),4vw,var(--s7));align-items:center}
+.ueber-karte > img{width:clamp(110px,15vw,180px)}
+@media (max-width:700px){
+  .ueber-karte{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .ueber-karte .vorzeile{justify-content:center}
+  .ueber-karte .knopf-reihe{justify-content:center}
+}
+
+/* Auswahlfeld, optisch an die Chips angeglichen */
+.filter-feld label{font-weight:700;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tinte-leise)}
+.auswahl{
+  font:inherit;font-weight:700;font-size:.98rem;color:var(--tinte);
+  min-height:48px;padding:var(--s2) var(--s8) var(--s2) var(--s5);
+  background:var(--karte);border:1.5px solid var(--linie-kraeftig);border-radius:var(--r-rund);
+  appearance:none;cursor:pointer;min-width:min(280px,100%);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f6e78' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right var(--s5) center;background-size:18px;
+}
+.auswahl:hover{border-color:var(--petrol)}
+
+/* Gleiches Raster, Text aber in der breiteren Spalte */
+.buch-raster--text-breit{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
+
+/* ---------- 19. Teddy als Maskottchen ------------------------------------ */
+/* Der Teddy begleitet jeweils einen Abschnitt, nie mehr als zwei je Seite. */
+.teddy-neben{width:clamp(108px,13vw,168px);flex:none}
+.titel-mit-teddy{display:grid;grid-template-columns:1fr auto;gap:clamp(var(--s5),4vw,var(--s7));align-items:center}
+.titel-mit-teddy--links{grid-template-columns:auto 1fr;margin-bottom:var(--s6)}
+.titel-mit-teddy > img{width:clamp(130px,17vw,224px)}
+.titel-mit-teddy--links > img{width:clamp(96px,11vw,144px)}
+@media (max-width:700px){
+  .titel-mit-teddy{grid-template-columns:1fr;justify-items:start}
+  .titel-mit-teddy > img{width:150px;order:-1}
+  .titel-mit-teddy--links{gap:var(--s4)}
+}
+
+/* ---------- 20. Galeriekarten feinjustiert -------------------------------- */
+
+@media (max-width:700px){
+  /* Auf schmalen Schirmen darf die Unterschrift das Bild nicht ueberragen. */
+  .werk-text{padding-top:var(--s3)}
+  .werk-text strong{font-size:.98rem;line-height:1.25}
+  .werk-text span{font-size:.8rem;line-height:1.3}
+}
+
+@media (max-width:700px){
+  /* Einspaltig wuerden die 3:4-Platzhalter je rund 460 px hoch - zweispaltig
+     bleibt der Leerzustand ueberschaubar. */
+  .leer-rahmen{grid-template-columns:repeat(2,1fr);gap:var(--s4)}
+  .leer-rahmen > :nth-child(3){display:none}
+}
+
+/* ---------- 21. Einladung statt Galerievorschau --------------------------- */
+/* Solange keine Einsendung vorliegt, zeigt die Startseite keine Bilderreihe,
+   sondern lädt zum Mitmachen ein. */
+.einladung{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(var(--s5),4vw,var(--s7));align-items:center;
+  background:var(--papier);border:2px dashed var(--linie-kraeftig);border-radius:var(--r-l);
+  padding:clamp(var(--s5),3vw,var(--s7));
+}
+.einladung > img{width:clamp(130px,16vw,200px)}
+.einladung h3{margin-bottom:var(--s3)}
+.einladung p{color:var(--tinte-leise);max-width:52ch}
+@media (max-width:700px){
+  .einladung{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .einladung p{margin-bottom:var(--s3)}
+}
+
+/* ---------- 22. Listen in Rechtstexten ------------------------------------ */
+.rechtstext h3{margin-top:var(--s6);font-size:1.12rem}
+.rechtstext ul{margin:0 0 var(--s4);padding-left:var(--s5)}
+.rechtstext li{margin-bottom:var(--s2)}
+.rechtstext li::marker{color:var(--petrol)}
+.rechtstext .fuehrung{margin-bottom:var(--s6)}

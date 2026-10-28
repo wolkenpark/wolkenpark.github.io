@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gestaltungssystem | Wolkenpark</title>
+<meta name="description" content="Farben, Schriften, Abstände, Bedienelemente und Bildrahmen der Wolkenpark-Website.">
+<meta name="theme-color" content="#fff5d8">
+<link rel="preload" href="assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/schriften.css">
+<link rel="stylesheet" href="assets/styles.css">
+<script defer src="assets/app.js"></script>
+</head>
+<body>
+<a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
+
+<header class="kopf">
+  <div class="rand kopf-innen">
+    <a class="marke" href="index.html" aria-label="Wolkenpark – zur Startseite">
+      <img src="assets/img/wortmarke.webp" alt="Wolkenpark" width="1400" height="383" fetchpriority="high">
+    </a>
+    <details class="nav-huelle">
+      <summary>
+        <svg class="balken-auf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="balken-zu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        Menü
+      </summary>
+      <nav class="haupt-nav" aria-label="Hauptnavigation"><a href="buch-bens-handwerkertag.html">Bücher</a><a href="galerie.html">Bildergalerie</a><a href="einsenden.html">Bild einsenden</a></nav>
+    </details>
+  </div>
+</header>
+
+<main id="inhalt">
+
+  <section class="abschnitt--eng">
+    <div class="rand">
+      <p class="vorzeile">Entwurfsunterlage</p>
+      <h1>Gestaltungssystem</h1>
+      <p class="fuehrung">Die Bausteine, aus denen alle Seiten von wolkenpark.de zusammengesetzt sind. Alle Werte stehen als CSS-Variablen in <code>assets/styles.css</code>.</p>
+    </div>
+  </section>
+
+  <section class="abschnitt--eng band">
+    <div class="rand">
+      <h2>Wortmarke</h2>
+      <p class="fuehrung">Die illustrierte Wortmarke ist die Hauptfassung und steht in der Kopfzeile. Für Fußzeile, Druck und sehr kleine Flächen gibt es eine schlichte typografische Fassung in Fredoka.</p>
+      <div class="muster" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:var(--s6)">
+        <div class="karte" style="text-align:center"><img src="assets/img/wortmarke.webp" alt="Illustrierte Wolkenpark-Wortmarke" width="1400" height="383" style="margin:0 auto"><p class="winzig" style="margin-top:var(--s4)">Hauptfassung · Kopfzeile, Auftakt</p></div>
+        <div class="karte" style="text-align:center;display:grid;place-items:center"><span class="wortmarke-typo" style="font-size:2.2rem"><svg viewBox="0 0 40 26" aria-hidden="true"><path fill="currentColor" d="M11 25C5 25 1 21 1 16c0-4 3-7 7-8 1-4 5-7 10-7 4 0 8 2 10 6 1-1 2-1 4-1 4 0 7 3 8 7 3 1 5 4 5 7 0 3-2 5-5 5Z"/></svg>Wolken<b>park</b></span><p class="winzig" style="margin-top:var(--s4)">Typografische Fassung · Fredoka 600, Petrol + Türkis, Wolkenpunkt in Sonnengelb</p></div>
+        <div class="karte" style="text-align:center;display:grid;place-items:center;background:var(--tinte)"><span class="wortmarke-typo" style="font-size:2.2rem;color:var(--sonne)"><svg viewBox="0 0 40 26" aria-hidden="true"><path fill="currentColor" d="M11 25C5 25 1 21 1 16c0-4 3-7 7-8 1-4 5-7 10-7 4 0 8 2 10 6 1-1 2-1 4-1 4 0 7 3 8 7 3 1 5 4 5 7 0 3-2 5-5 5Z"/></svg>Wolken<b style="color:var(--tuerkis-hell)">park</b></span><p class="winzig" style="margin-top:var(--s4);color:rgba(255,245,216,.76)">Negativfassung · Fußzeile</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt--eng">
+    <div class="rand">
+      <h2>Farben</h2>
+      <p class="fuehrung">Abgeleitet vom Umschlag von „Bens großer Handwerkertag“. Cremeweiß trägt die Fläche, Petrol setzt die Akzente, Sonnengelb, Korallrot und Grün kommen nur in kleinen Dosen dazu.</p>
+      <div class="muster" style="margin-top:var(--s6)"><div class="farbfeld"><i style="background:#fff5d8"></i><span><b>--papier</b>#fff5d8<br>Seitengrund<br><em style="color:var(--tinte-leise);font-style:normal">Umschlagcreme des Buches</em></span></div><div class="farbfeld"><i style="background:#fae9c4"></i><span><b>--papier-tief</b>#fae9c4<br>Abgesetzte Bänder<br><em style="color:var(--tinte-leise);font-style:normal">Wechsel zwischen Abschnitten</em></span></div><div class="farbfeld"><i style="background:#fffdf7"></i><span><b>--karte</b>#fffdf7<br>Karten, Passepartout<br><em style="color:var(--tinte-leise);font-style:normal">Fläche hinter den Bildern</em></span></div><div class="farbfeld"><i style="background:#123e50"></i><span><b>--tinte</b>#123e50<br>Fließtext, Überschriften<br><em style="color:var(--tinte-leise);font-style:normal">10,6:1 auf Papier</em></span></div><div class="farbfeld"><i style="background:#4f6a78"></i><span><b>--tinte-leise</b>#4f6a78<br>Sekundärtext<br><em style="color:var(--tinte-leise);font-style:normal">5,3:1 auf Papier</em></span></div><div class="farbfeld"><i style="background:#0f6e78"></i><span><b>--petrol</b>#0f6e78<br>Hauptakzent, Knöpfe<br><em style="color:var(--tinte-leise);font-style:normal">5,5:1 auf Papier</em></span></div><div class="farbfeld"><i style="background:#56a09d"></i><span><b>--tuerkis</b>#56a09d<br>Flächenakzent<br><em style="color:var(--tinte-leise);font-style:normal">Flächen; auf Dunkel --tuerkis-hell</em></span></div><div class="farbfeld"><i style="background:#ffc73d"></i><span><b>--sonne</b>#ffc73d<br>Knopf, Buntstiftstrich<br><em style="color:var(--tinte-leise);font-style:normal">Tinte darauf: 7,4:1</em></span></div><div class="farbfeld"><i style="background:#e2563c"></i><span><b>--koralle</b>#e2563c<br>Fokusrahmen, Warnung<br><em style="color:var(--tinte-leise);font-style:normal">Sparsam einsetzen</em></span></div><div class="farbfeld"><i style="background:#6aa84f"></i><span><b>--gruen</b>#6aa84f<br>Bestätigung<br><em style="color:var(--tinte-leise);font-style:normal">Sparsam einsetzen</em></span></div><div class="farbfeld"><i style="background:#cfe8f2"></i><span><b>--himmel</b>#cfe8f2<br>Elternhinweis<br><em style="color:var(--tinte-leise);font-style:normal">Ruhige Hinweisfläche</em></span></div><div class="farbfeld"><i style="background:#e6d9b8"></i><span><b>--linie</b>#e6d9b8<br>Trennlinien, Rahmen<br><em style="color:var(--tinte-leise);font-style:normal">Warm statt grau</em></span></div></div>
+    </div>
+  </section>
+
+  <section class="abschnitt--eng band">
+    <div class="rand">
+      <h2>Schrift</h2>
+      <div class="muster" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:var(--s6)">
+        <div class="karte">
+          <p class="winzig">Überschriften · Fredoka 400/500/600</p>
+          <p style="font-family:var(--schrift-titel);font-size:2.6rem;line-height:1.1;margin:var(--s3) 0">Große Malabenteuer</p>
+          <p class="winzig">Leicht gerundet, freundlich, passt zur illustrierten Wortmarke. Vollständige deutsche Umlaute und ß.</p>
+        </div>
+        <div class="karte">
+          <p class="winzig">Fließtext · Nunito 400/600/700</p>
+          <p style="font-size:1.1rem;margin:var(--s3) 0">Ein Stuhl wackelt, der Wasserhahn tropft, ein Regal fehlt. Ben hilft Papa und Handwerkerin Mia.</p>
+          <p class="winzig">17 px Grundgröße, Zeilenhöhe 1,65, Zeilenlänge höchstens 58 Zeichen. Keine Handschrift für längere Texte.</p>
+        </div>
+      </div>
+      <div class="karte" style="margin-top:var(--s5)">
+        <p class="winzig" style="margin-bottom:var(--s4)">Größenstufen</p>
+        <h1 style="margin:0 0 var(--s3)">H1 · 35–62 px</h1>
+        <h2 style="margin:0 0 var(--s3)">H2 · 27–43 px</h2>
+        <h3 style="margin:0 0 var(--s3)">H3 · 19–24 px</h3>
+        <p class="fuehrung" style="margin:0 0 var(--s3)">Führungstext · 19 px</p>
+        <p style="margin:0 0 var(--s3)">Fließtext · 17 px</p>
+        <p class="winzig" style="margin:0">Kleingedrucktes · 14 px</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt--eng">
+    <div class="rand">
+      <h2>Abstände</h2>
+      <p class="fuehrung">Eine Skala in Vierer- und Achterschritten. Abschnitte bekommen 64–128 px Luft nach oben und unten.</p>
+      <div class="massband" style="margin-top:var(--s6)"><div><i style="width:4px;height:4px"></i>--s1<br>4px</div><div><i style="width:8px;height:8px"></i>--s2<br>8px</div><div><i style="width:12px;height:12px"></i>--s3<br>12px</div><div><i style="width:16px;height:16px"></i>--s4<br>16px</div><div><i style="width:24px;height:24px"></i>--s5<br>24px</div><div><i style="width:32px;height:32px"></i>--s6<br>32px</div><div><i style="width:48px;height:48px"></i>--s7<br>48px</div><div><i style="width:64px;height:64px"></i>--s8<br>64px</div><div><i style="width:96px;height:96px"></i>--s9<br>96px</div><div><i style="width:128px;height:128px"></i>--s10<br>128px</div></div>
+    </div>
+  </section>
+
+  <section class="abschnitt--eng band">
+    <div class="rand">
+      <h2>Bedienelemente</h2>
+      <p class="fuehrung">Mindesthöhe 54 px, auf kleinen Bildschirmen über die volle Breite. Fokus wird immer sichtbar mit einem korallroten Rahmen angezeigt.</p>
+      <div class="karte" style="margin-top:var(--s6)">
+        <p class="winzig" style="margin-bottom:var(--s4)">Knöpfe</p>
+        <div class="knopf-reihe">
+          <span class="knopf knopf--haupt">Das Buch entdecken</span>
+          <span class="knopf knopf--sonne">Bild einsenden</span>
+          <span class="knopf knopf--rand">Zur Bildergalerie</span>
+          <span class="knopf knopf--rand knopf--klein">Adresse kopieren</span>
+          <span class="textlink">Textlink <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+        <p class="winzig" style="margin:var(--s7) 0 var(--s4)">Filterchips · aktiver und ruhender Zustand</p>
+        <div class="chip-reihe">
+          <span class="chip" aria-pressed="true">Alle Motive</span>
+          <span class="chip">Der wackelige Stuhl</span>
+          <span class="chip">Die Wasserwaage</span>
+        </div>
+        <p class="winzig" style="margin:var(--s7) 0 var(--s4)">Externe Links werden gekennzeichnet</p>
+        <p class="extern-notiz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg> Externer Link. Öffnet amazon.de in einem neuen Tab.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt--eng">
+    <div class="rand">
+      <h2>Bildrahmen</h2>
+      <p class="fuehrung">Das Leitelement der Website: jedes Bild hängt in einem cremefarbenen Passepartout mit feiner Haarlinie und weichem Schatten. In der Galerie stehen die Rahmen leicht schief, beim Darüberfahren richten sie sich auf.</p>
+      <div class="muster" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:var(--s6)">
+        <div>
+          <div class="bildrahmen"><img src="assets/motive/motiv-03.svg" alt="" width="1086" height="1448"></div>
+          <p class="winzig" style="margin-top:var(--s3)"><b>.bildrahmen</b> · Galerie, Blätterband</p>
+        </div>
+        <div>
+          <div class="bildrahmen bildrahmen--gross"><img src="assets/motive/motiv-10.svg" alt="" width="1086" height="1448"></div>
+          <p class="winzig" style="margin-top:var(--s3)"><b>.bildrahmen--gross</b> · Auftakt, Buchseite, große Ansicht</p>
+        </div>
+        <div>
+          <div class="leer-rahmen" style="grid-template-columns:1fr;margin:0"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-2 4 3"/></svg></div></div>
+          <p class="winzig" style="margin-top:var(--s3)"><b>.leer-rahmen</b> · leere Galerie</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt--eng band">
+    <div class="rand">
+      <h2>Handgezeichnete Details</h2>
+      <p class="fuehrung">Sparsam und nie als großflächige Dekoration: ein Buntstiftstrich unter einem Wort, eine Wolke hinter dem Auftakt, ein Sternchen in der Vorzeile.</p>
+      <div class="muster" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:var(--s6)">
+        <div class="karte"><p style="font-family:var(--schrift-titel);font-size:1.8rem;margin:0">Große <span class="gemalt">Malabenteuer.</span></p><p class="winzig" style="margin-top:var(--s5)"><b>.gemalt</b> · Buntstiftstrich, höchstens einmal pro Überschrift</p></div>
+        <div class="karte" style="text-align:center"><span style="display:inline-block;width:110px;color:var(--himmel)"><svg viewBox="0 0 200 90" aria-hidden="true"><path fill="currentColor" d="M44 86c-20 0-34-13-34-29 0-14 10-25 24-28C38 15 52 4 70 4c15 0 28 8 35 20 4-2 8-3 13-3 15 0 27 11 29 25 11 3 19 13 19 24 0 9-6 16-15 16Z"/></svg></span><p class="winzig" style="margin-top:var(--s4)"><b>.wolke</b> · Hintergrund des Auftakts</p></div>
+        <div class="karte"><p class="vorzeile" style="margin:0">Willkommen im Wolkenpark</p><p class="winzig" style="margin-top:var(--s5)"><b>.vorzeile</b> · Sonnengelber Strich vor der Rubrik</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt--eng">
+    <div class="rand">
+      <h2>Barrierefreiheit</h2>
+      <ul class="hinweisliste" style="margin-top:var(--s6);max-width:70ch">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.6 2.6L16 9.5"/></svg><div><strong>Kontraste.</strong><span>Alle Textfarben erreichen mindestens 5,3:1 auf ihrem Untergrund (gemessen) und damit WCAG AA.</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.6 2.6L16 9.5"/></svg><div><strong>Tastatur.</strong><span>Sprungmarke zum Inhalt, sichtbarer Fokusrahmen, Navigation als natives &lt;details&gt;-Element, große Bildansicht als &lt;dialog&gt; mit Escape und Pfeiltasten.</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.6 2.6L16 9.5"/></svg><div><strong>Touch.</strong><span>Alle Bedienelemente mindestens 46 px hoch, Knöpfe 54 px.</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.6 2.6L16 9.5"/></svg><div><strong>Ohne JavaScript.</strong><span>Navigation, alle Seiten und alle Bilder bleiben erreichbar. Nur Filter und große Bildansicht brauchen JavaScript.</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.6 2.6L16 9.5"/></svg><div><strong>Bewegung.</strong><span>Bei <em>prefers-reduced-motion</em> entfallen alle Übergänge.</span></div></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="fuss">
+  <div class="rand">
+    <div class="fuss-raster">
+      <div>
+        <a class="wortmarke-typo" href="index.html"><svg viewBox="0 0 40 26" aria-hidden="true"><path fill="currentColor" d="M11 25C5 25 1 21 1 16c0-4 3-7 7-8 1-4 5-7 10-7 4 0 8 2 10 6 1-1 2-1 4-1 4 0 7 3 8 7 3 1 5 4 5 7 0 3-2 5-5 5Z"/></svg>Wolken<b>park</b></a>
+        <p class="klein" style="margin-top:var(--s4);max-width:34ch">Kleine Geschichten für große Fantasie. Ausmalbücher, in denen jedes Bild die Geschichte weitererzählt.</p>
+      </div>
+      <div>
+        <h4>Entdecken</h4>
+        <ul>
+          <li><a href="buch-bens-handwerkertag.html">Bücher</a></li>
+          <li><a href="galerie.html">Bildergalerie</a></li>
+          <li><a href="einsenden.html">Bild einsenden</a></li>
+          <li><a href="ueber.html">Über Wolkenpark</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt &amp; Rechtliches</h4>
+        <ul>
+          <li><a href="mailto:bilder@wolkenpark.de">bilder@wolkenpark.de</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fuss-unten">
+      <span>© 2026 Wolkenpark · Paul Spieker</span>
+      <span>Gestaltungsentwurf für wolkenpark.de</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
